@@ -18,4 +18,10 @@ class ProductPage(BasePage):
         book_cost = self.browser.find_element(*ProductPageLocators.THE_BOOK_COST)
         basket_total = self.browser.find_element(*ProductPageLocators.THE_BASKET_TOTAL)
         assert book_cost.text.split(" £") [0] == basket_total.text.split(" ") [4], "The book cost is not equal to basket total cost"
+    
+    def should_not_be_success_message(self):
+        assert self.is_not_element_present(*ProductPageLocators.MESSAGE_ADD_TO_BASKET), "Success message is presented, but should not be"
+        
+    def should_not_be_success_message2(self):
+        assert self.is_disappeared(*ProductPageLocators.MESSAGE_ADD_TO_BASKET), "Success message should disappear but it does not dissapear"
         
