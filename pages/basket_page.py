@@ -1,3 +1,4 @@
+import pytest
 from .locators import BasketPageLocators
 from .locators import ProductPageLocators
 from .base_page import BasePage

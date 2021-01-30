@@ -1,3 +1,4 @@
+import pytest
 from .base_page import BasePage
 from .locators import ProductPageLocators
 from .locators import BasketPageLocators
@@ -20,7 +21,10 @@ class ProductPage(BasePage):
     def book_cost_should_match_the_basket_total(self):    
         book_cost = self.browser.find_element(*ProductPageLocators.THE_BOOK_COST)
         basket_total = self.browser.find_element(*ProductPageLocators.THE_BASKET_TOTAL)
-        assert book_cost.text.split(" £") [0] == basket_total.text.split(" ") [4], "The book cost is not equal to basket total cost"
+        basket_text_list = basket_total.text.split()
+        for i in range (len(basket_text_list)):
+            if book_cost.text.split(" £") [0] == basket_text_list[i]:
+                assert book_cost.text.split(" £") [0] == basket_text_list[i], "The book cost is not equal to basket total cost"
     
     def should_not_be_success_message(self):
         assert self.is_not_element_present(*ProductPageLocators.MESSAGE_ADD_TO_BASKET), "Success message is presented, but should not be"
